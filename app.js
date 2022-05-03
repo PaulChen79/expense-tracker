@@ -3,6 +3,7 @@ const exphbs = require('express-handlebars')
 const methodOverride = require('method-override')
 const session = require('express-session')
 const flash = require('connect-flash')
+const routes = require('./routes/index')
 const PORT = process.env.PORT || 3000
 require('./config/mongoose')
 require('dotenv').config()
@@ -16,12 +17,14 @@ app.use(methodOverride('_method'))
 app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: true }))
 app.use(flash())
 app.use((req, res, next) => {
+  // res.locals.isAuthenticated = req.isAuthenticated()
   res.locals.user = req.user
   res.locals.success_messages = req.flash('success_messages')
   res.locals.error_messages = req.flash('error_messages')
   next()
 })
 
+app.use(routes)
 
 
 

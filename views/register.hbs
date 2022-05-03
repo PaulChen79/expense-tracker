@@ -1,0 +1,26 @@
+<div class="container mt-5 w-50">
+  <h1 class="my-3 pb-3 text-center">家庭記帳本</h1>
+  <form action="/users/register" method="POST">
+    <div class="form-group my-3">
+      <label for="name">使用者名稱</label>
+      <input type="text" id="name" name="name" class="form-control" placeholder="請輸入使用者名稱" value="{{name}}">
+    </div>
+    <div class="form-group my-3">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" class="form-control" placeholder="請輸入Email" value="{{email}}">
+    </div>
+    <div class="form-group my-3">
+      <label for="password">密碼</label>
+      <input type="password" id="password" name="password" class="form-control" placeholder="請輸入密碼"
+        value="{{password}}" </div>
+      <div class="form-group my-3">
+        <label for="confirmPassword">確認密碼</label>
+        <input type="password" id="confirmPassword" name="再次輸入密碼" class="form-control"
+          placeholder="Confirm Password">
+      </div>
+      <div class="d-flex justify-content-between align-items-center">
+      <button type="submit" class="btn btn-primary btn-block mt-2">註冊</button>
+      <p class="lead mt-4">已經有帳號？ <a href="/users/login" class="text-decoration-none">登入</a></p>
+    </div>
+  </form>
+</div>
