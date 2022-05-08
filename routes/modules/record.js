@@ -35,4 +35,54 @@ router.post('/new', (req, res, next) => {
     .catch(error => next(error))
 })
 
+router.get('/:id', (req, res, next) => {
+  const _id = req.params.id
+  const userId = req.user._id
+  return Record.findOne({ _id, userId })
+    .lean()
+    .then(record => {
+      const categoryId = record.categoryId
+      return Category.find()
+      .lean()
+      .then(categories => {
+        const categoryName = categories.filter(category => category._id.equals(categoryId))[0].name
+        record.date = record.date.toJSON().toString().slice(0, 10)
+        res.render('edit', { record, categories, categoryName })
+      })
+      .catch(error => next(error))
+    })
+    .catch(error => next(error))
+})
+
+router.put('/:id', (req, res, next) => {
+  const { name, date, amount, categoryId } = req.body
+  const userId = req.user._id
+  const _id = req.params.id
+  const errors = []
+  if (!name || !date || !amount || !categoryId) {
+    errors.push({ message: 'You have to fill all the required fields.' })
+  }
+  if (errors.length) {
+    return Record.findOne({ _id, userId })
+    .lean()
+    .then(record => {
+      const categoryId = record.categoryId
+      return Category.find()
+      .lean()
+      .then(categories => {
+        const categoryName = categories.filter(category => category._id.equals(categoryId))[0].name
+        record.date = record.date.toJSON().toString().slice(0, 10)
+        res.render('edit', { errors, record, categories, categoryName })
+      })
+      .catch(error => next(error))
+    })
+  }
+  return Record.findByIdAndUpdate(_id, req.body)
+    .then(() => {
+      req.flash('success_messages', 'You have successfully update a record.')
+      res.redirect('/')
+    })
+    .catch(error => next(error))
+})
+
 module.exports = router

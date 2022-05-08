@@ -11,5 +11,4 @@ router.use('/', authenticator, home)
 router.use('/records', authenticator, records)
 router.use('/', errorHandler)
 
-
 module.exports = router

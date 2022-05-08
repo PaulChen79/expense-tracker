@@ -3,7 +3,7 @@ module.exports = {
     if(error instanceof Error) {
       req.flash('error_messages', `${error.name}: ${error.message}`)
     } else {
-      req.falsh('error_messages', `${error}`)
+      req.flash('error_messages', `${error}`)
     }
     res.redirect('back')
     next()
