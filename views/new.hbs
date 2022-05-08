@@ -1,0 +1,51 @@
+<div class="container mt-5" style="max-width: 1000px;">
+  <h1 class="text-center my-3">新增支出</h1>
+  <form action="/records/new" method="POST">
+    <div class="row">
+      <div class="col-12 col-md-10 mx-auto">
+        <p class="mb-2">
+          <span class="text-secondary fs-5">
+            <i class="fas fa-house pr-2"></i>
+            名稱：
+          </span>
+        </p>
+        <input class="form-control form-control-lg mb-3" type="text" placeholder="請輸入名稱"
+          aria-label=".form-control-lg example" name="name" value="{{name}}" required>
+
+        <p class="mb-2">
+          <span class="text-secondary fs-5">
+            <i class="fas fa-utensils pr-2"></i>
+            類別：
+          </span>
+        </p>
+        <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="categoryId">
+          <option selected>請選擇類別</option>
+          {{#each categories}}
+          <option value="{{this._id}}">{{this.name}}</option>
+          {{/each}}
+        </select>
+
+        <p class="mb-2">
+          <span class="text-secondary fs-5">
+            <i class="fas fa-map-marker-alt pr-2"></i>
+            日期：
+          </span>
+        </p>
+        <input class="form-control form-control-lg mb-3" type="date" name="date" id="date" placeholder="請輸入消費時間" value="{{date}}">
+
+        <p class="mb-2">
+          <span class="text-secondary fs-5">
+            <i class="fas fa-heart pr-2"></i>
+            金額
+          </span>
+        </p>
+        <input class="form-control form-control-lg mb-3" type="number" placeholder="請輸入消費金額"
+          aria-label=".form-control-lg example" name="amount" value="{{amount}}">
+
+        <button type="submit" class="btn btn-secondary mb-5">
+          新增
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

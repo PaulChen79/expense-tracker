@@ -7,38 +7,38 @@
         類別
       </button>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-        <li><a class="dropdown-item" href="#"><i class="fa-solid fa-house mx-2" style="color: #174480;"></i>家居物業</a>
+        {{#each categories}}
+        <li>
+          <a class="dropdown-item" href="/?category={{this.name}}">
+            <i class="{{this.icon}} mx-2" style="color: #174480;"></i>{{this.name}}
+          </a>
         </li>
-        <li><a class="dropdown-item" href="#"><i class="fa-solid fa-van-shuttle mx-2"
-              style="color: #174480;"></i>交通出行</a></li>
-        <li><a class="dropdown-item" href="#"><i class="fa-solid fa-face-grin-beam mx-2"
-              style="color: #174480;"></i>休閒娛樂</a></li>
-        <li><a class="dropdown-item" href="#"><i class="fa-solid fa-utensils mx-2" style="color: #174480;"></i>餐飲食品</a>
-        </li>
-        <li><a class="dropdown-item" href="#"><i class="fa-solid fa-pen mx-2" style="color: #174480;"></i>其他</a></li>
+        {{/each}}
       </ul>
     </div>
   </div>
 
   <div class="mt-3 d-flex justify-content-around">
     <div class="align-self-center" style="font-size: 25px;">總金額:</div>
-    <div class="align-self-center" style="font-size: 90px; color: #f56e1b;">15000</div>
+    <div class="align-self-center" style="font-size: 90px; color: #f56e1b;">{{totalAmount}}</div>
   </div>
   <div class="mt-3 d-flex justify-content-end">
-    <a class="btn btn-primary" style="background-color: #174480;" href="">新增支出</a>
+    <a class="btn btn-primary" style="background-color: #174480;" href="/records/new">新增支出</a>
   </div>
+
   <ul class="list-group mt-3">
+    {{#each records}}
     <li class="list-group-item list-group-item-action">
       <div class="row">
         <div class="col-1 category-icon align-self-center">
-          <i class="fa-solid fa-house mx-auto" style="max-width: 30px; font-size: 30px; color: #174480;"></i>
+          <i class="{{this.icon}} mx-auto" style="max-width: 30px; font-size: 30px; color: #174480;"></i>
         </div>
         <div class="col d-flex flex-column align-item-center">
-          <span>租金</span>
-          <span>2020-04-16</span>
+          <span>{{this.name}}</span>
+          <span>{{this.date}}</span>
         </div>
         <div class="col d-flex flex-column justify-content-center">
-          <span style="font-size: 20px;">金額： <span style="color: #f56e1b;">$15000</span></span>
+          <span style="font-size: 20px;">金額： <span style="color: #f56e1b;">${{this.amount}}</span></span>
         </div>
         <div class="col-1 d-flex align-items-center">
           <a class="text-decoration-none mx-2" href=""><i class="fa-solid fa-pen-to-square"
@@ -48,5 +48,6 @@
         </div>
       </div>
     </li>
+    {{/each}}
   </ul>
 </div>
