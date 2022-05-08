@@ -13,7 +13,7 @@
 <body>
   <header>
     <nav class="navbar navbar-dark bg-primary">
-      <a class="navbar-brand text-center mx-3" href="/">家庭記帳本</a>
+      <a class="navbar-brand text-center mx-3" href="/">{{#if isAuthenticated}}{{user.name}} 的{{/if}}家庭記帳本</a>
       {{#if isAuthenticated}}
       <div>
         <a class="btn btn-outline-info mx-3" href="/users/logout">Logout</a>
