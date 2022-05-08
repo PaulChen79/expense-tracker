@@ -46,10 +46,13 @@
           <span style="font-size: 20px;">金額： <span style="color: #f56e1b;">${{this.amount}}</span></span>
         </div>
         <div class="col-1 d-flex align-items-center">
-          <a class="text-decoration-none mx-2" href="/records/{{this._id}}"><i class="fa-solid fa-pen-to-square"
+          <a class="text-decoration-none" href="/records/{{this._id}}/edit"><i class="fa-solid fa-pen-to-square"
               style="color: #174480; font-size: 20px;"></i></a>
-          <a class="text-decoration-none mx-2" href="/records/{{this._id}}?_method=DELETE"><i class="fa-solid fa-trash-can"
-              style="color: #f56e1b; font-size: 20px;"></i></a>
+          <form action="/records/{{this._id}}?_method=DELETE" method="POST">
+            <button type="submit" class="btn text-decoration-none">
+              <i class="fa-solid fa-trash-can" style="color: #f56e1b; font-size: 20px;"></i>
+            </button>
+          </form>
         </div>
       </div>
     </li>

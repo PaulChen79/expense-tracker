@@ -35,7 +35,7 @@ router.post('/new', (req, res, next) => {
     .catch(error => next(error))
 })
 
-router.get('/:id', (req, res, next) => {
+router.get('/:id/edit', (req, res, next) => {
   const _id = req.params.id
   const userId = req.user._id
   return Record.findOne({ _id, userId })
@@ -54,7 +54,7 @@ router.get('/:id', (req, res, next) => {
     .catch(error => next(error))
 })
 
-router.put('/:id', (req, res, next) => {
+router.put('/:id/edit', (req, res, next) => {
   const { name, date, amount, categoryId } = req.body
   const userId = req.user._id
   const _id = req.params.id
@@ -80,6 +80,16 @@ router.put('/:id', (req, res, next) => {
   return Record.findByIdAndUpdate(_id, req.body)
     .then(() => {
       req.flash('success_messages', 'You have successfully update a record.')
+      res.redirect('/')
+    })
+    .catch(error => next(error))
+})
+
+router.delete('/:id', (req, res, next) => {
+  const _id = req.params.id
+  return Record.findByIdAndDelete(_id)
+    .then(() => {
+      req.flash('success_messages', 'You have successfully delete a record.')
       res.redirect('/')
     })
     .catch(error => next(error))
