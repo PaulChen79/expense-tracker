@@ -1,10 +1,8 @@
 module.exports = {
-  errorHandler (error, req, res, next) {
-    if(error instanceof Error) {
-      req.flash('error_messages', `${error.name}: ${error.message}`)
-    } else {
-      req.flash('error_messages', `${error}`)
-    }
+  errorHandler: (error, req, res, next) => {
+    error instanceof Error
+      ? req.flash('error_messages', `${error.name}: ${error.message}`)
+      : req.flash('error_messages', `${error}`)
     res.redirect('back')
     next(error)
   }

@@ -1,61 +1,72 @@
-<div class="container mt-5" style="max-width: 1000px;">
-  <div class="d-flex justify-content-center my-3">
-    <span class="align-self-center mx-2">請選擇類別分類</span>
-    <div class="dropdown mx-2">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
-        aria-expanded="false">
-        類別
+<div class='container mt-5' style='max-width: 1000px;'>
+  <div class='d-flex justify-content-center my-3'>
+    <span class='align-self-center mx-2'>請選擇類別分類</span>
+    <div class='dropdown mx-2'>
+      <button
+        class='btn btn-secondary dropdown-toggle'
+        type='button'
+        id='dropdownMenuButton1'
+        data-bs-toggle='dropdown'
+        aria-expanded='false'
+      >
+        {{#if categoryName}}{{categoryName}}{{else}}全部{{/if}}
       </button>
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+      <ul class='dropdown-menu' aria-labelledby='dropdownMenuButton1'>
         {{#each categories}}
-        <li>
-          <a class="dropdown-item" href="/?category={{this.name}}">
-            <i class="{{this.icon}} mx-2" style="color: #174480;"></i>{{this.name}}
-          </a>
-        </li>
+          <li>
+            <a class='dropdown-item' href='/?category={{this.name}}'>
+              <i class='{{this.icon}} mx-2' style='color: #174480;'></i>{{this.name}}
+            </a>
+          </li>
         {{/each}}
         <li>
-          <a class="dropdown-item" href="/">
-            <i class="fa-solid fa-align-justify mx-2" style="color: #174480;"></i>全部
+          <a class='dropdown-item' href='/'>
+            <i class='fa-solid fa-align-justify mx-2' style='color: #174480;'></i>全部
           </a>
         </li>
       </ul>
     </div>
   </div>
 
-  <div class="mt-3 d-flex justify-content-around">
-    <div class="align-self-center" style="font-size: 25px;">總金額:</div>
-    <div class="align-self-center" style="font-size: 90px; color: #f56e1b;">{{totalAmount}}</div>
+  <div class='mt-3 d-flex justify-content-around'>
+    <div class='align-self-center' style='font-size: 25px;'>總金額:</div>
+    <div class='align-self-center' style='font-size: 90px; color: #f56e1b;'>{{totalAmount}}</div>
   </div>
-  <div class="mt-3 d-flex justify-content-end">
-    <a class="btn btn-primary" style="background-color: #174480;" href="/records/new">新增支出</a>
+  <div class='mt-3 d-flex justify-content-end'>
+    <a class='btn btn-primary' style='background-color: #174480;' href='/records/new'>新增支出</a>
   </div>
 
-  <ul class="list-group mt-3">
+  <ul class='list-group mt-3'>
     {{#each records}}
-    <li class="list-group-item list-group-item-action">
-      <div class="row">
-        <div class="col-1 category-icon align-self-center">
-          <i class="{{this.icon}} mx-auto" style="max-width: 30px; font-size: 30px; color: #174480;"></i>
+      <li class='list-group-item list-group-item-action'>
+        <div class='row'>
+          <div class='col-1 category-icon align-self-center'>
+            <i
+              class='{{this.icon}} mx-auto'
+              style='max-width: 30px; font-size: 30px; color: #174480;'
+            ></i>
+          </div>
+          <div class='col d-flex flex-column align-item-center'>
+            <span>{{this.name}}</span>
+            <span>{{this.date}}</span>
+          </div>
+          <div class='col d-flex flex-column justify-content-center'>
+            <span style='font-size: 20px;'>金額：
+              <span style='color: #f56e1b;'>${{this.amount}}</span></span>
+          </div>
+          <div class='col-1 d-flex align-items-center'>
+            <a class='text-decoration-none' href='/records/{{this._id}}/edit'><i
+                class='fa-solid fa-pen-to-square'
+                style='color: #174480; font-size: 20px;'
+              ></i></a>
+            <form action='/records/{{this._id}}?_method=DELETE' method='POST'>
+              <button type='submit' class='btn text-decoration-none'>
+                <i class='fa-solid fa-trash-can' style='color: #f56e1b; font-size: 20px;'></i>
+              </button>
+            </form>
+          </div>
         </div>
-        <div class="col d-flex flex-column align-item-center">
-          <span>{{this.name}}</span>
-          <span>{{this.date}}</span>
-        </div>
-        <div class="col d-flex flex-column justify-content-center">
-          <span style="font-size: 20px;">金額： <span style="color: #f56e1b;">${{this.amount}}</span></span>
-        </div>
-        <div class="col-1 d-flex align-items-center">
-          <a class="text-decoration-none" href="/records/{{this._id}}/edit"><i class="fa-solid fa-pen-to-square"
-              style="color: #174480; font-size: 20px;"></i></a>
-          <form action="/records/{{this._id}}?_method=DELETE" method="POST">
-            <button type="submit" class="btn text-decoration-none">
-              <i class="fa-solid fa-trash-can" style="color: #f56e1b; font-size: 20px;"></i>
-            </button>
-          </form>
-        </div>
-      </div>
-    </li>
+      </li>
     {{/each}}
   </ul>
 </div>
